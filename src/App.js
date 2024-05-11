@@ -1,5 +1,7 @@
 import './App.css';
-import { useState } from 'react';
+import { createContext, useContext, useState } from 'react';
+
+const MsgContext = createContext();
 // app -> Son
 function Son (props) {
   console.log(props);
@@ -37,6 +39,24 @@ function Son5 (props) {
 
 }
 
+function Son6 () {
+  return (
+    <div>
+      <div>this is Son 6</div>
+      <Son7 />
+    </div>
+  )
+}
+
+function Son7 () {
+  const name = useContext(MsgContext);
+  return (
+    <div>
+      <div>this is Son 7, {name}</div>
+    </div>
+  )
+}
+
 function App() {
   const name = "This is Son msg";
   const [msg, setmsg] = useState('');
@@ -53,13 +73,13 @@ function App() {
       <h1>My First React App , {msg}</h1>
       <p>Welcome to my first React app!</p>
       <Son3
-        // name = {name}
-        // age = {25}
-        // isMarried = {false}
-        // list = {[1, 2, 3]}
-        // obj = {{name: "John", age: 25}}
-        // func = {() => console.log("Hello")}
-        // child = {<span>this is react</span>}
+        name = {name}
+        age = {25}
+        isMarried = {false}
+        list = {[1, 2, 3]}
+        obj = {{name: "John", age: 25}}
+        func = {() => console.log("Hello")}
+        child = {<span>this is react</span>}
         funMsg = {getMsg}
       />
       <Son2>
@@ -67,6 +87,9 @@ function App() {
       </Son2>
       <Son4 onGetAName={getAName} />
       <Son5 name = {data}/>
+      <MsgContext.Provider value={name}>
+        <Son6 />
+      </MsgContext.Provider>
     </div>
   );
 }
