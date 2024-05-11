@@ -1,23 +1,33 @@
-import logo from './logo.svg';
 import './App.css';
+// app -> Son
+function Son (props) {
+  console.log(props);
+  return <div>{props.name}, JSX: {props.child}</div>
+}
+// App -> Son2
+function Son2 (props) {
+  console.log(props.children);
+  return <div>This is {props.children}</div>
+}
 
 function App() {
+  const name = "This is John";
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>My First React App</h1>
+      <p>Welcome to my first React app!</p>
+      <Son
+        name = {name}
+        age = {25}
+        isMarried = {false}
+        list = {[1, 2, 3]}
+        obj = {{name: "John", age: 25}}
+        func = {() => console.log("Hello")}
+        child = {<span>this is react</span>}
+      />
+      <Son2>
+        <h1>Children</h1>
+      </Son2>
     </div>
   );
 }
